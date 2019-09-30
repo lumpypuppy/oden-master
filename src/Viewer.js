@@ -11,7 +11,7 @@ class Viewer extends Component {
     
     componentDidMount() {
         var urlid = 'b36d9a6575a04cc3948405d33c962900';
-        
+        var annotArray;
         var client = new window.Sketchfab('1.0.0', this.iframe);
         client.init(urlid, {
             success: (api) => {
@@ -23,13 +23,21 @@ class Viewer extends Component {
                         console.log(annotations);
                     });
                     api.addEventListener('annotationFocus', function(index) {
+                        var els = document.querySelectorAll('.active');
+                        for (var i = 0; i < els.length; i++) {
+                            els[i].classList.remove('active')
+                          }
+
                         var annotationNumber = index+1;
                         document.getElementById('parentDiv').className = "slides";
-                        document.getElementById('annotation-' + index).className = "slide";
+
+                        document.getElementById('annotation-' + index).classList.remove("active");
                         document.getElementById('annotation-' + annotationNumber).className = "slide active";
                         console.log('Reached annotation ' + index);
                     });
                     api.addEventListener('annotationBlur', function(index) {
+                        document.getElementById('annotation-' + index).classList.remove("active");
+                        document.getElementById('annotation-' + index).className = "slide";
                         document.getElementById('parentDiv').className = "slide";
                     });
                 });
@@ -45,25 +53,25 @@ class Viewer extends Component {
             <div className="sketchfab-viewer">
                 <iframe ref={(iframe) => {
                     this.iframe = iframe;
-                }} src="about:blank" allowFullScreen="true" title="Sketchfab Viewer" width="100%" height="1000px" sandbox="allow-scripts allow-same-origin allow-popups allow-forms" allow="autoplay; fullscreen; vr" allowvr allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+                }} src="about:blank" allowFullScreen="true" title="Sketchfab Viewer" width="100%" height="900px" sandbox="allow-scripts allow-same-origin allow-popups allow-forms" frameborder="0" allow="autoplay; fullscreen; vr" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
                 <div id="parentDiv" className="slide">
                     <div id="annotation-0" className="slide">
-                        <img alt='slide1' src={image00}></img>
+                        
                     </div>
                     <div id="annotation-1" className="slide">
-                        <img alt='slide2' src={image01}></img>
+                        <p>Test 1</p>
                     </div>
                     <div id="annotation-2" className="slide">
-                        <img alt='slide3' src={image02}></img>
+                        <p>Test 2</p>
                     </div>
                     <div id="annotation-3" className="slide">
-                        <img alt='slide4' src={image03}></img>
+                        <p>Test 3</p>
                     </div>
                     <div id="annotation-4" className="slide">
-                        <img alt='slide5' src={image04}></img>
+                        <p>Test 4</p>
                     </div>
                     <div id="annotation-5" className="slide">
-                        <img alt='slide6' src={image05}></img>
+                        <p >Test 5</p>
                     </div>
                 </div>
             </div>
