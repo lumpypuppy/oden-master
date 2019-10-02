@@ -1,17 +1,10 @@
 import React, {Component} from 'react';
-import image00 from './assets/00.jpg';
-import image01 from './assets/01.jpg';
-import image02 from './assets/02.png';
-import image03 from './assets/03.jpg';
-import image04 from './assets/04.jpg';
-import image05 from './assets/05.jpg';
-
+import Action from './annotationNumber1';
 
 class Viewer extends Component {
     
     componentDidMount() {
         var urlid = 'b36d9a6575a04cc3948405d33c962900';
-        var annotArray;
         var client = new window.Sketchfab('1.0.0', this.iframe);
         client.init(urlid, {
             success: (api) => {
@@ -27,7 +20,6 @@ class Viewer extends Component {
                         for (var i = 0; i < els.length; i++) {
                             els[i].classList.remove('active')
                           }
-
                         var annotationNumber = index+1;
                         document.getElementById('parentDiv').className = "slides";
 
@@ -53,13 +45,13 @@ class Viewer extends Component {
             <div className="sketchfab-viewer">
                 <iframe ref={(iframe) => {
                     this.iframe = iframe;
-                }} src="about:blank" allowFullScreen="true" title="Sketchfab Viewer" width="100%" height="900px" sandbox="allow-scripts allow-same-origin allow-popups allow-forms" frameborder="0" allow="autoplay; fullscreen; vr" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+                }} src="about:blank" title="Sketchfab Viewer" width="100%" height="900px" sandbox="allow-scripts allow-same-origin allow-popups allow-forms" frameBorder="0" webkitAllowFullScreen={true} mozAllowFullScreen={true} allowFullScreen={true}></iframe>
                 <div id="parentDiv" className="slide">
                     <div id="annotation-0" className="slide">
                         
                     </div>
                     <div id="annotation-1" className="slide">
-                        <p>Test 1</p>
+                        <Action />
                     </div>
                     <div id="annotation-2" className="slide">
                         <p>Test 2</p>
